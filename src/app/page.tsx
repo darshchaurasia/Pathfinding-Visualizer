@@ -3,6 +3,7 @@
 import React, { useRef } from 'react';
 import Grid from '../components/Grid';
 import Header from '../components/Header';
+import Footer from '../components/Footer'; 
 import ControlPanel from '../components/ControlPanel';
 import './globals.css';
 
@@ -32,10 +33,11 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-100">
+    <div className="min-h-screen flex flex-col items-center bg-black text-purple-500">
       <Header />
       <ControlPanel onStartDijkstra={handleStartAlgorithm} onStartAStar={handleStartAStar} onReset={handleResetGrid} />
       <Grid ref={gridRef} rows={20} cols={20} />
+      <Footer /> 
     </div>
   );
 };
