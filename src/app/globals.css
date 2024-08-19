@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,17 +9,17 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #000000; /* Black background */
-  color: #ffffff; /* Purple font color */
-  font-family: 'Roboto', sans-serif; /* Use Roboto font */
+  color: #FAFAFA; /* Font color */
+  font-family: 'Carter One', cursive; /* Use Carter One font */
 }
 
 button {
-  background-color: #ffffff; /* Purple background for buttons */
-  color: #000000; /* White text for buttons */
+  background-color: #ffffff; /* White background for buttons */
+  color: #000000; /* Black text for buttons */
 }
 
 header, footer {
   text-align: center;
   padding: 10px 0;
-  background-color: #000000; /* Slightly lighter black for header and footer */
+  background-color: #0a0908; /* Slightly lighter black for header and footer */
 }

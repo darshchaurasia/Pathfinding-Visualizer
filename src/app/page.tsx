@@ -1,43 +1,42 @@
 "use client";
 
-import React, { useRef } from 'react';
-import Grid from '../components/Grid';
-import Header from '../components/Header';
-import Footer from '../components/Footer'; 
-import ControlPanel from '../components/ControlPanel';
-import './globals.css';
+import React from "react";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import { AuroraBackground } from "../components/aurora-background"; 
+import { motion } from "framer-motion";
+import "./globals.css";
 
 const HomePage = () => {
-  const gridRef = useRef<{
-    handleStartAlgorithm: () => void;
-    handleStartAStar: () => void;
-    handleResetGrid: () => void;
-  }>(null);
-
-  const handleStartAlgorithm = () => {
-    if (gridRef.current) {
-      gridRef.current.handleStartAlgorithm();
-    }
-  };
-
-  const handleStartAStar = () => {
-    if (gridRef.current) {
-      gridRef.current.handleStartAStar();
-    }
-  };
-
-  const handleResetGrid = () => {
-    if (gridRef.current) {
-      gridRef.current.handleResetGrid();
-    }
-  };
-
   return (
-    <div className="min-h-screen flex flex-col items-center">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <ControlPanel onStartDijkstra={handleStartAlgorithm} onStartAStar={handleStartAStar} onReset={handleResetGrid} />
-      <Grid ref={gridRef} rows={20} cols={20} />
-      <Footer /> 
+
+      {/* AuroraBackground with content */}
+      <AuroraBackground className="bg-gradient-to-b from-indigo-500 via-purple-500 to-blue-500 ">
+        <motion.div
+          initial={{ opacity: 0.0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="relative flex flex-col gap-4 items-center justify-center px-4"
+        >
+          <div className="text-3xl md:text-7xl font-bold text-white text-center">
+            Background lights are cool you know.
+          </div>
+          <div className="font-extralight text-base md:text-4xl text-neutral-200 py-4">
+            And this, is chemical burn.
+          </div>
+          <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
+            Debug now
+          </button>
+        </motion.div>
+      </AuroraBackground>
+
+      <Footer />
     </div>
   );
 };
