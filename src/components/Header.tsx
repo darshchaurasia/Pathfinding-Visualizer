@@ -7,7 +7,7 @@ const Header = () => {
       <nav>
         <ul className="flex space-x-6">
           <li>
-            <a href="#" className="hover:text-white">Home</a>
+            <a href="https://www.darshchaurasia.com" className="hover:text-white" target="_blank" rel="noopener noreferrer">Website</a>
           </li>
           <li>
             <a href="#" className="hover:text-white">About</a>
@@ -16,7 +16,7 @@ const Header = () => {
             <a href="#" className="hover:text-white">Algorithms</a>
           </li>
           <li>
-            <a href="#" className="hover:text-white">Contact</a>
+            <a href="mailto:darshchaurasia@gmail.com" className="hover:text-white">Email</a>
           </li>
         </ul>
       </nav>
