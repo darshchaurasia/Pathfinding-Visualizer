@@ -9,13 +9,13 @@ html, body {
   margin: 0;
   padding: 0;
   background-color: #000000; /* Black background */
-  color: #a855f7; /* Purple font color */
+  color: #ffffff; /* Purple font color */
   font-family: 'Roboto', sans-serif; /* Use Roboto font */
 }
 
 button {
-  background-color: #a855f7; /* Purple background for buttons */
-  color: #ffffff; /* White text for buttons */
+  background-color: #ffffff; /* Purple background for buttons */
+  color: #000000; /* White text for buttons */
 }
 
 header, footer {
