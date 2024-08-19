@@ -6,7 +6,7 @@ import Footer from '../../components/Footer';
 
 const Algorithms = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-black text-purple-500">
+    <div className="min-h-screen flex flex-col items-center">
       <Header />
       <main className="flex-grow flex items-center justify-center">
         <div className="max-w-3xl text-center p-8">

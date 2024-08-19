@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Header = () => {
   return (
-    <header className="w-full py-4 bg-black text-purple-500 flex justify-between items-center px-8">
+    <header className="w-full py-4 flex justify-between items-center px-8">
       <h1 className="text-2xl font-bold">Pathfinding Visualizer</h1>
       <nav>
         <ul className="flex space-x-6">
@@ -17,7 +17,7 @@ const Header = () => {
             <Link href="/algorithms" className="hover:text-white">Algorithms</Link>
           </li>
           <li>
-            <a href="mailto:darshchaurasia@gmail.com" className="hover:text-white">Email</a>
+            <a href="https://www.darshchaurasia.com"  target="_blank" className="hover:text-white">Website</a>
           </li>
         </ul>
       </nav>

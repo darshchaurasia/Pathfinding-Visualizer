@@ -33,7 +33,7 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-black text-purple-500">
+    <div className="min-h-screen flex flex-col items-center">
       <Header />
       <ControlPanel onStartDijkstra={handleStartAlgorithm} onStartAStar={handleStartAStar} onReset={handleResetGrid} />
       <Grid ref={gridRef} rows={20} cols={20} />
