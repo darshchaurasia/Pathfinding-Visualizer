@@ -14,13 +14,13 @@ const Header = () => {
             <Link href="/about" className="hover:text-white">About</Link>
           </li>
           <li>
-            <Link href="/visualizer" className="hover:text-white">Visualizer</Link>
-          </li>
-          <li>
             <Link href="/algorithms" className="hover:text-white">Algorithms</Link>
           </li>
           <li>
-            <a href="https://www.darshchaurasia.com"  target="_blank" className="hover:text-white">Website</a>
+            <Link href="/visualizer" className="hover:text-white">Visualizer</Link>
+          </li>
+          <li>
+            <a href="https://www.darshchaurasia.com"  target="_blank" className="hover:text-white">Contact</a>
           </li>
         </ul>
       </nav>
