@@ -28,7 +28,7 @@ const HomePage = () => {
           <div className="text-3xl md:text-7xl font-bold text-white text-center">
             Visualize Pathfinding
           </div>
-          <div className="font-extralight text-base md:text-4xl text-neutral-200 py-4">
+          <div className="font-extralight text-base md:text-4xl text-neutral-100 py-4">
             See Dijkstra, A* in Action.
           </div>
           {/* Update the button to use Link */}
