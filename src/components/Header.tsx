@@ -19,9 +19,9 @@ const Header = () => {
           <li>
             <Link href="/visualizer" className="hover:text-white">Visualizer</Link>
           </li>
-          <li>
+         {/* <li>
             <a href="https://www.darshchaurasia.com"  target="_blank" className="hover:text-white">Contact</a>
-          </li>
+          </li>*/}
         </ul>
       </nav>
     </header>
