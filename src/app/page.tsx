@@ -12,6 +12,8 @@ const HomePage = () => {
   const handleStartAlgorithm = () => {
     if (gridRef.current) {
       gridRef.current.handleStartAlgorithm();
+    } else {
+      console.error("Grid ref is not available");
     }
   };
 

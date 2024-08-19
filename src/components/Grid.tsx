@@ -13,6 +13,7 @@ interface NodeType {
   distance: number;
   isVisited: boolean;
   previousNode: NodeType | null;
+  isPath?: boolean;  // New optional property to track if a node is part of the shortest path
 }
 
 interface GridProps {
@@ -61,7 +62,7 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
 
   const handleStartAlgorithm = () => {
     const newGrid = dijkstra(grid, grid[0][0], grid[rows - 1][cols - 1]);
-    setGrid(newGrid);
+    setGrid([...newGrid]);  // Trigger re-render with updated grid
   };
 
   // Expose methods to parent component via ref
@@ -101,6 +102,7 @@ const getNewGridWithWallToggled = (grid: NodeType[][], row: number, col: number)
 };
 
 const dijkstra = (grid: NodeType[][], startNode: NodeType, endNode: NodeType): NodeType[][] => {
+  console.log("Running Dijkstra's algorithm");
   const visitedNodesInOrder: NodeType[] = [];
   startNode.distance = 0;
   const unvisitedNodes = getAllNodes(grid);
@@ -109,13 +111,28 @@ const dijkstra = (grid: NodeType[][], startNode: NodeType, endNode: NodeType): N
     sortNodesByDistance(unvisitedNodes);
     const closestNode = unvisitedNodes.shift();
     if (closestNode?.isWall) continue;
-    if (closestNode?.distance === Infinity) return grid;
+    if (closestNode?.distance === Infinity) {
+      console.log("No more reachable nodes");
+      return grid;
+    }
     closestNode!.isVisited = true;
     visitedNodesInOrder.push(closestNode!);
-    if (closestNode === endNode) return grid;
+    if (closestNode === endNode) {
+      console.log("End node reached");
+      return traceShortestPath(grid, endNode);  // Trace the shortest path after reaching the end node
+    }
     updateUnvisitedNeighbors(closestNode!, grid);
   }
 
+  return grid;
+};
+
+const traceShortestPath = (grid: NodeType[][], endNode: NodeType): NodeType[][] => {
+  let currentNode = endNode;
+  while (currentNode.previousNode !== null) {
+    currentNode = currentNode.previousNode;
+    currentNode.isPath = true;  // Mark nodes in the shortest path
+  }
   return grid;
 };
 
