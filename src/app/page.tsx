@@ -25,13 +25,13 @@ const HomePage = () => {
           className="relative flex flex-col gap-4 items-center justify-center px-4"
         >
           <div className="text-3xl md:text-7xl font-bold text-white text-center">
-            Background lights are cool you know.
+          Visualize Pathfinding
           </div>
           <div className="font-extralight text-base md:text-4xl text-neutral-200 py-4">
-            And this, is chemical burn.
+          See Dijkstra, A* in Action.
           </div>
           <button className="bg-black dark:bg-white rounded-full w-fit text-white dark:text-black px-4 py-2">
-            Debug now
+          Test it for yourself!
           </button>
         </motion.div>
       </AuroraBackground>
