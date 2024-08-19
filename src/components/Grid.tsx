@@ -10,10 +10,12 @@ interface NodeType {
   isStart: boolean;
   isEnd: boolean;
   isWall: boolean;
-  distance: number;
+  distance: number;  // This will be the `g` cost for A*
   isVisited: boolean;
   previousNode: NodeType | null;
-  isPath?: boolean;  // New optional property to track if a node is part of the shortest path
+  isPath?: boolean;  // To track if a node is part of the shortest path
+  f: number;  // f = g + h (total cost in A*)
+  h: number;  // Heuristic cost in A*
 }
 
 interface GridProps {
@@ -33,6 +35,8 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
         distance: Infinity,
         isVisited: false,
         previousNode: null,
+        f: 0,
+        h: 0,
       }))
     );
   };
@@ -61,7 +65,7 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
   };
 
   const handleStartAlgorithm = () => {
-    // Reset the grid before running the algorithm
+    // Reset the grid before running the Dijkstra algorithm
     const resetGrid = grid.map(row =>
       row.map(node => ({
         ...node,
@@ -69,6 +73,8 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
         isVisited: false,
         previousNode: null,
         isPath: false,  // Reset the path property
+        f: 0,
+        h: 0,
       }))
     );
     setGrid(resetGrid);  // Ensure the grid state is reset
@@ -77,9 +83,29 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
     setGrid([...newGrid]);  // Trigger re-render with the updated grid
   };
 
+  const handleStartAStar = () => {
+    // Reset the grid before running the A* algorithm
+    const resetGrid = grid.map(row =>
+      row.map(node => ({
+        ...node,
+        distance: Infinity,
+        isVisited: false,
+        previousNode: null,
+        isPath: false,
+        f: 0,  // Reset f cost
+        h: 0,  // Reset heuristic cost
+      }))
+    );
+    setGrid(resetGrid);  // Ensure the grid state is reset
+
+    const newGrid = aStar(resetGrid, resetGrid[0][0], resetGrid[rows - 1][cols - 1]);
+    setGrid([...newGrid]);  // Trigger re-render with the updated grid
+  };
+
   // Expose methods to parent component via ref
   useImperativeHandle(ref, () => ({
     handleStartAlgorithm,
+    handleStartAStar,  // Expose A* method to parent component
     handleResetGrid,
   }));
 
@@ -114,29 +140,77 @@ const getNewGridWithWallToggled = (grid: NodeType[][], row: number, col: number)
 };
 
 const dijkstra = (grid: NodeType[][], startNode: NodeType, endNode: NodeType): NodeType[][] => {
-  console.log("Running Dijkstra's algorithm");
-  const visitedNodesInOrder: NodeType[] = [];
-  startNode.distance = 0;
-  const unvisitedNodes = getAllNodes(grid);
-
-  while (!!unvisitedNodes.length) {
-    sortNodesByDistance(unvisitedNodes);
-    const closestNode = unvisitedNodes.shift();
-    if (closestNode?.isWall) continue;
-    if (closestNode?.distance === Infinity) {
-      console.log("No more reachable nodes");
-      return grid;
+    console.log("Running Dijkstra's algorithm");
+    const visitedNodesInOrder: NodeType[] = [];
+    startNode.distance = 0;
+    const unvisitedNodes = getAllNodes(grid);
+  
+    while (!!unvisitedNodes.length) {
+      sortNodesByDistance(unvisitedNodes);
+      const closestNode = unvisitedNodes.shift() || null;  // Ensure closestNode is either NodeType or null
+      if (closestNode?.isWall) continue;
+      if (closestNode?.distance === Infinity) {
+        console.log("No more reachable nodes");
+        return grid;
+      }
+      closestNode!.isVisited = true;
+      visitedNodesInOrder.push(closestNode!);
+      if (closestNode === endNode) {
+        console.log("End node reached");
+        return traceShortestPath(grid, endNode);  // Trace the shortest path after reaching the end node
+      }
+      updateUnvisitedNeighbors(closestNode!, grid);
     }
-    closestNode!.isVisited = true;
-    visitedNodesInOrder.push(closestNode!);
-    if (closestNode === endNode) {
-      console.log("End node reached");
-      return traceShortestPath(grid, endNode);  // Trace the shortest path after reaching the end node
-    }
-    updateUnvisitedNeighbors(closestNode!, grid);
-  }
+  
+    return grid;
+  };  
 
-  return grid;
+  const aStar = (grid: NodeType[][], startNode: NodeType, endNode: NodeType): NodeType[][] => {
+    const openSet: NodeType[] = [];  // Nodes to be evaluated
+    const closedSet: NodeType[] = [];  // Nodes already evaluated
+  
+    startNode.distance = 0;  // g cost
+    startNode.h = heuristic(startNode, endNode);  // Heuristic cost
+    startNode.f = startNode.distance + startNode.h;  // f cost
+    openSet.push(startNode);
+  
+    while (openSet.length > 0) {
+      // Sort the open set by f cost (lowest f first)
+      openSet.sort((a, b) => a.f - b.f);
+      const currentNode = openSet.shift() || null;  // Ensure currentNode is either NodeType or null
+  
+      if (currentNode?.isWall) continue;  // Skip walls
+      if (currentNode === endNode) {
+        return traceShortestPath(grid, endNode);  // Found the path
+      }
+  
+      closedSet.push(currentNode!);
+      currentNode!.isVisited = true;
+  
+      const neighbors = getUnvisitedNeighbors(currentNode!, grid);
+      for (const neighbor of neighbors) {
+        if (closedSet.includes(neighbor)) continue;
+  
+        const tentativeG = currentNode!.distance + 1;
+        if (!openSet.includes(neighbor)) {
+          openSet.push(neighbor);
+        } else if (tentativeG >= neighbor.distance) {
+          continue;  // This is not a better path
+        }
+  
+        neighbor.previousNode = currentNode;
+        neighbor.distance = tentativeG;  // g cost
+        neighbor.h = heuristic(neighbor, endNode);  // Heuristic cost
+        neighbor.f = neighbor.distance + neighbor.h;  // f cost
+      }
+    }
+  
+    return grid;  // If no path is found
+  };
+  
+
+const heuristic = (nodeA: NodeType, nodeB: NodeType) => {
+  return Math.abs(nodeA.row - nodeB.row) + Math.abs(nodeA.col - nodeB.col);  // Manhattan distance
 };
 
 const traceShortestPath = (grid: NodeType[][], endNode: NodeType): NodeType[][] => {
