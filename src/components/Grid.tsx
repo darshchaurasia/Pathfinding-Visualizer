@@ -61,8 +61,20 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
   };
 
   const handleStartAlgorithm = () => {
-    const newGrid = dijkstra(grid, grid[0][0], grid[rows - 1][cols - 1]);
-    setGrid([...newGrid]);  // Trigger re-render with updated grid
+    // Reset the grid before running the algorithm
+    const resetGrid = grid.map(row =>
+      row.map(node => ({
+        ...node,
+        distance: Infinity,
+        isVisited: false,
+        previousNode: null,
+        isPath: false,  // Reset the path property
+      }))
+    );
+    setGrid(resetGrid);  // Ensure the grid state is reset
+
+    const newGrid = dijkstra(resetGrid, resetGrid[0][0], resetGrid[rows - 1][cols - 1]);
+    setGrid([...newGrid]);  // Trigger re-render with the updated grid
   };
 
   // Expose methods to parent component via ref
