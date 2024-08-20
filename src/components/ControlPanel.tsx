@@ -11,19 +11,19 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ onStartDijkstra, onStartASt
     <div className="my-4 flex space-x-4">
       <button
         onClick={onStartDijkstra}
-        className="py-2 px-4 rounded hover:bg-[#fa497e] hover:text-white active:bg-[#fa497e] active:text-white"
+        className="py-2 px-4 rounded hover:bg-[#8B5CF6] hover:text-white"
       >
         Start Dijkstra
       </button>
       <button
         onClick={onStartAStar}
-        className="py-2 px-4 rounded hover:bg-[#fa497e] hover:text-white active:bg-[#fa497e] active:text-white"
+        className="py-2 px-4 rounded hover:bg-[#8B5CF6] hover:text-white"
       >
         Start A*
       </button>
       <button
         onClick={onReset}
-        className="py-2 px-4 rounded hover:bg-[#fa497e] hover:text-white active:bg-[#fa497e] active:text-white"
+        className="py-2 px-4 rounded hover:bg-[#8B5CF6] hover:text-white"
       >
         Reset Grid
       </button>
