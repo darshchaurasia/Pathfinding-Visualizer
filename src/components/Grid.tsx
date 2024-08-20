@@ -254,4 +254,5 @@ const getUnvisitedNeighbors = (node: NodeType, grid: NodeType[][]): NodeType[] =
   return neighbors.filter(neighbor => !neighbor.isVisited);
 };
 
+Grid.displayName = 'Grid';
 export default Grid;
