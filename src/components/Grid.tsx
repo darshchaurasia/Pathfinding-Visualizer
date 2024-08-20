@@ -2,7 +2,6 @@
 
 import React, { useState, useImperativeHandle, forwardRef } from 'react';
 import Node from './Node';
-import styles from '../styles/Grid.module.css';
 
 interface NodeType {
   row: number;
@@ -110,9 +109,9 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
   }));
 
   return (
-    <div className={styles.grid}>
+    <div className="grid">
       {grid.map((row, rowIndex) => (
-        <div key={rowIndex} className={styles.row}>
+        <div key={rowIndex} className="row">
           {row.map((node, colIndex) => (
             <Node
               key={colIndex}
@@ -125,7 +124,7 @@ const Grid = forwardRef(({ rows, cols }: GridProps, ref) => {
         </div>
       ))}
     </div>
-  );
+  );  
 });
 
 const getNewGridWithWallToggled = (grid: NodeType[][], row: number, col: number): NodeType[][] => {

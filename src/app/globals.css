@@ -23,3 +23,21 @@ header, footer {
   padding: 10px 0;
   background-color: #000000; /* Slightly lighter black for header and footer */
 }
+
+.grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000000;
+}
+
+.row {
+  display: flex;
+}
+
+.node {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #333333;
+  cursor: pointer;
+}
