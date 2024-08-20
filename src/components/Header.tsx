@@ -29,6 +29,11 @@ const Header: React.FC = () => {
             </Link>
           </li>
           <li>
+            <Link href="/demo" className={`hover:underline ${activeLink === '/demo' ? 'underline' : ''}`} onClick={() => handleLinkClick('/demo')}>
+              Demo
+            </Link>
+          </li>
+          <li>
             <Link href="/visualizer" className={`hover:underline ${activeLink === '/visualizer' ? 'underline' : ''}`} onClick={() => handleLinkClick('/visualizer')}>
               Visualizer
             </Link>
