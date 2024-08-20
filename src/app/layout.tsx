@@ -1,3 +1,5 @@
+import './globals.css';
+
 export const metadata = {
   title: 'Pathfinding Visualizer',
   description: 'Visualize different pathfinding algorithms',
