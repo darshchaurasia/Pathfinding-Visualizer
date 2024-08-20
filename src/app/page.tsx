@@ -25,10 +25,10 @@ const HomePage = () => {
           }}
           className="relative flex flex-col gap-4 items-center justify-center px-4"
         >
-        <div className="text-3xl md:text-7xl font-bold text-white text-center" style={{ textShadow: '2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000' }}>
+        <div className="text-4xl md:text-7xl font-bold text-white text-center" style={{ textShadow: '2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000' }}>
          Visualize Pathfinding
         </div>
-        <div className="font-extralight text-base md:text-4xl text-neutral-100 py-4" style={{ textShadow: '2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000' }}>
+        <div className="font-extralight text-lg md:text-4xl text-neutral-100 py-4" style={{ textShadow: '2px 2px 0 #000, -2px 2px 0 #000, 2px -2px 0 #000, -2px -2px 0 #000' }}>
          See Dijkstra, A* in Action.
         </div>
 
