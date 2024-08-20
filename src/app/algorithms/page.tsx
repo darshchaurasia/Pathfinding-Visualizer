@@ -13,7 +13,7 @@ const Algorithms = () => {
     >
       <Header />
       <main className="flex-grow flex items-center justify-center">
-        <div className="max-w-3xl text-center p-8">
+        <div className="max-w-4xl text-center p-8">
           <h1 className="text-4xl font-bold mb-6">Algorithms</h1> {/* Increased to 4xl */}
           <section className="mb-8">
             <h2 className="text-3xl font-semibold mb-4">Dijkstra's Algorithm</h2> {/* Increased to 3xl */}

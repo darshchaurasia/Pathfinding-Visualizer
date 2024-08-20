@@ -13,7 +13,7 @@ const About = () => {
     >
       <Header />
       <main className="flex-grow flex items-center justify-center">
-        <div className="max-w-2xl text-center p-8">
+        <div className="max-w-4xl text-center p-8">
           <h1 className="text-4xl font-bold mb-4">About This Website</h1> {/* Increased to 4xl */}
           <p className="text-2xl leading-relaxed">
             This website is a pathfinding visualizer that demonstrates how various pathfinding algorithms like Dijkstra's and A* work. 
