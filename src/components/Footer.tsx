@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaDiscord, FaLinkedin, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { FaDiscord, FaLinkedin, FaYoutube, FaInstagram, FaGithub } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 
 const Footer = () => {
@@ -30,6 +30,9 @@ const Footer = () => {
             </a>
             <a href="https://www.instagram.com/darshchaurasiaa/" target="_blank" rel="noopener noreferrer">
               <FaInstagram size={24} />
+            </a>
+            <a href="https://github.com/darshchaurasia/Pathfinding-Visualizer" target="_blank" rel="noopener noreferrer">
+              <FaGithub size={24} />
             </a>
           </div>
           <div className="mt-2">
